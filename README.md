@@ -29,7 +29,7 @@ Copies the icons for the current station and the next station to a user's tempor
 Displays the current station, the corresponding icon, the next station, the corresponding icon, and the days remaining for the next station in the format current_station;current_icon;next_station;next_icon;days_remaining.
 
 ## Screenshots
-![conky from my antiX desktop](screenshot/screenshot_conk_current_and_next_station)
+![conky from my antiX desktop](screenshot/screenshot_conk_current_and_next_station.jpg)
 
 ![conky from my antiX desktop](screenshot/screenshot_conky.jpg)
 
