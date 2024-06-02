@@ -92,8 +92,8 @@ next_season_date_sec=$(date -d "$next_season_date" +%s)
 days_until_next_season=$(( (next_season_date_sec - current_date_sec) / 86400 ))
 
 # Copiar la estación actual y la proxima en el directorio temporal del usuario.
-cp -r ~/papelera/test_conky/icons/${current_icon}.png ~/.cache/current_station.png
-cp -r ~/papelera/test_conky/icons/${next_icon}.png ~/.cache/next_station.png
+cp -r ~/.config/conky/icons/${current_icon}.png ~/.cache/current_station.png
+cp -r ~/.config/conky/icons/${next_icon}.png ~/.cache/next_station.png
 
 # Mostrar la estación actual, el icono y los días restantes para la próxima estación
 echo "$current_season;$current_icon;$next_season;$next_icon;$days_until_next_season"
