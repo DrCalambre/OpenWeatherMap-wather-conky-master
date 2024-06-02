@@ -33,4 +33,8 @@ Displays the current station, the corresponding icon, the next station, the corr
 
 ![conky from my antiX desktop](screenshot/screenshot_conky.jpg)
 
+The desktop wallpaper is a photograph of a sunset on one of my bicycle rides along the Rio Gallegos coastal (Argentina).
+![conky from my antiX desktop](screenshot/screenshot_antix_rox-icewm_desktop.jpg
+)
+
 
