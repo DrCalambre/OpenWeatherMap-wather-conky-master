@@ -73,7 +73,7 @@ else
         next_icon="winter"
     elif [[ "$current_date" < "$spring_start" ]]; then
         current_season="Invierno"
-        next_season=   "Primavera"
+        next_season="Primavera"
         next_season_date=$spring_start
         current_icon="winter"
         next_icon="spring"
@@ -91,10 +91,16 @@ current_date_sec=$(date -d "$current_date" +%s)
 next_season_date_sec=$(date -d "$next_season_date" +%s)
 days_until_next_season=$(( (next_season_date_sec - current_date_sec) / 86400 ))
 
-# Copiar la estación actual y la proxima en el directorio temporal del usuario.
+# Determinar el texto de los días restantes
+if [ "$days_until_next_season" -eq 1 ]; then
+    days_text="un día para"
+else
+    days_text="$days_until_next_season días para"
+fi
+
+# Copiar la estación actual y la próxima en el directorio temporal del usuario.
 cp -r ~/.config/conky/icons/${current_icon}.png ~/.cache/current_station.png
 cp -r ~/.config/conky/icons/${next_icon}.png ~/.cache/next_station.png
 
 # Mostrar la estación actual, el icono y los días restantes para la próxima estación
-echo "$current_season;$current_icon;$next_season;$next_icon;$days_until_next_season"
-
+echo "$current_season;$current_icon;$next_season;$next_icon;$days_text"
