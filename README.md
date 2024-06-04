@@ -68,7 +68,7 @@ The desktop wallpaper is a photograph of a sunset on one of my bicycle rides alo
 
 
 ## The new icons for the stations:
-![conky from my antiX desktop](screenshot/spring.png)
-![conky from my antiX desktop](screenshot/summer.png)
-![conky from my antiX desktop](screenshot/autumn.png)
-![conky from my antiX desktop](screenshot/winter.png)
+![conky from my antiX desktop](icons/spring.png)
+![conky from my antiX desktop](icons/summer.png)
+![conky from my antiX desktop](icons/autumn.png)
+![conky from my antiX desktop](icons/winter.png)
