@@ -1,7 +1,23 @@
 #!/bin/bash
+# -------------------------------------------------------------------
+# File: degrees.sh                                    
+# Type: Bash Shell Script                             
+# By Julio Alberto Lascano http://drcalambre.blogspot.com/
+#________          _________        .__                ___.                  
+#\______ \_______  \_   ___ \_____  |  | _____    _____\_ |_________   ____  
+# |    |  \_  __ \ /    \  \/\__  \ |  | \__  \  /     \| __ \_  __ \_/ __ \ 
+# |    `   \  | \/ \     \____/ __ \|  |__/ __ \|  Y Y  \ \_\ \  | \/\  ___/ 
+#/_______  /__|     \______  (____  /____(____  /__|_|  /___  /__|    \___  >
+#        \/                \/     \/          \/      \/    \/            \/ 
+#
+# Last modified:2024-06-04                    
+# ------------------------
+# Este script calcula la estación actual y los días restantes para la siguiente 
+# estación en función de la ubicación actual.
+# -------------------------------------------------------------------
+# / OS : $GNULinux, $FreeBSD (X Window)
+# -------------------------------------------------------------------
 
-# GetStation.sh
-# Este script calcula la estación actual y los días restantes para la siguiente estación en función de la ubicación actual.
 
 # Obtener la latitud usando ipinfo.io
 latitude=$(curl -s https://ipinfo.io/ | jq -r '.loc' | cut -d ',' -f 1)
