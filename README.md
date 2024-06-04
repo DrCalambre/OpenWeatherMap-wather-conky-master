@@ -14,8 +14,16 @@ Best regards
 # **Update in 02/06/24**
 **calculate if it is spring, summer, autumn or winter.**
 
+This update for Conky is useful for those who want to have updated information about the seasons of 
+the year and the days remaining until the change of season, based on their geographical location. 
+
+With this implementation, Conky can dynamically display the current season of the year and the remaining
+days until the next season right on your desktop.
+
 ## Description of the Script
-GetStation.sh
+In `~/.config/conky/scripts/GetStation.sh`
+
+
 This script calculates the current season (whether spring, summer, fall or winter) and the days remaining 
 for the next season based on the current location.
 
