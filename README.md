@@ -80,3 +80,12 @@ The desktop wallpaper is a photograph of a sunset on one of my bicycle rides alo
 ![conky from my antiX desktop](icons/summer.png)
 ![conky from my antiX desktop](icons/autumn.png)
 ![conky from my antiX desktop](icons/winter.png)
+
+## Argentine Postcards and the seasons:
+
+In San Martin de los Andes, a city in the southwest of the province of Neuquén, nestled in the Andes Mountains.
+The transition from autumn to winter.
+A beautiful mix of colors with the early arrival of the snow.
+
+![conky from my antiX desktop](screenshot/otoño-invierno-Patagonia.jpg)
+
