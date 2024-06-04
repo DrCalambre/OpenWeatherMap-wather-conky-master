@@ -1,6 +1,6 @@
 #!/bin/bash
 # -------------------------------------------------------------------
-# File: degrees.sh                                    
+# File: GetStation.sh
 # Type: Bash Shell Script                             
 # By Julio Alberto Lascano http://drcalambre.blogspot.com/
 #________          _________        .__                ___.                  
