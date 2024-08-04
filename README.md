@@ -64,6 +64,73 @@ The script copies the corresponding icons for the current season and the next se
 Show Results: Finally, the script displays the current season, the icon of the current season, the next season, the icon 
 of the next season, and the text for the remaining days.
 
+* * *
+# **Update in 03/08/24**
+**This update introduces a new `conky.conf` configuration that monitors the temperature of two hard drives and displays an alert if the temperature is critical.**
+
+```markdown
+## Updated `conky.conf` File
+
+
+```plaintext
+conky.config = {
+    alignment = 'top_right',
+    background = false,
+    double_buffer = true,
+    update_interval = 1.0,
+    total_run_times = 0,
+    own_window = true,
+    own_window_type = 'override',
+    own_window_transparent = true,
+    own_window_hints = 'undecorated,below,sticky,skip_taskbar,skip_pager',
+    draw_borders = false,
+    draw_graph_borders = true,
+    default_color = 'white',
+    default_shade_color = 'black',
+    default_outline_color = 'black',
+    use_xft = true,
+    font = 'DejaVu Sans Mono:size=10',
+    xftalpha = 0.8,
+    override_utf8_locale = true,
+    draw_outline = false,
+    draw_shades = false,
+    no_buffers = true,
+    uppercase = false,
+    cpu_avg_samples = 2,
+    net_avg_samples = 2,
+    text_buffer_size = 2048,
+};
+
+conky.text = [[
+${color grey}Temperature of /dev/sda: ${execi 8 sudo smartctl -A /dev/sda | grep -i 'temperature_celsius' | awk '{if ($10 >= 50) print "ALERT! CRITICAL: " $10 "°C"; else print $10 "°C";}'}
+${color grey}Temperature of /dev/sdb: ${execi 8 sudo smartctl -A /dev/sdb | grep -i 'temperature_celsius' | awk '{if ($10 >= 50) print "ALERT! CRITICAL: " $10 "°C"; else print $10 "°C";}'}
+]];
+```
+
+### Explanation
+
+1. **`execi` Command**: Executes an external command at specified intervals (in this case, every 8 seconds).
+2. **`sudo smartctl -A /dev/sda`**: Retrieves the SMART information of the disk.
+3. **`grep -i 'temperature_celsius'`**: Filters the line containing the temperature.
+4. **`awk`**: Compares the temperature to a critical value (50°C). If the temperature is equal to or greater than 50°C, it displays an alert; otherwise, it shows the normal temperature.
+
+### `sudo` Permissions
+
+To allow Conky to execute `smartctl` with `sudo` without requiring a password, add a rule to `sudoers`. Edit the `sudoers` file with `visudo`:
+
+```plaintext
+sudo visudo
+```
+
+Add the following line at the end of the file, replacing `your_username` with the appropriate username:
+
+```plaintext
+your_username ALL=(ALL) NOPASSWD: /usr/sbin/smartctl
+```
+
+This will enable `smartctl` to run with `sudo` without requiring a password when invoked by Conky.
+
+With these changes, Conky will directly display the temperature of the disks and highlight if any of them reach a critical level.
 
 ## Screenshots
 ![conky from my antiX desktop](screenshot/screenshot_conk_current_and_next_station.jpg)
