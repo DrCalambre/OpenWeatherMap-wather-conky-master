@@ -31,8 +31,8 @@ Located in `~/.config/conky/scripts/horas_luz.sh`, this script:
 **Example usage in terminal**:
 ```bash
 ./horas_luz.sh "$(cat ~/.cache/openweathermap.json | jq -r .sys.sunset | awk '{print strftime("%H:%M:%S",$1)}')"
-
-## The new feature "Remaining Daylight" field in Conky:
+```
+## The new feature "Remaining Daylight":
 ![conky from my antiX desktop](screenshot/screenshot_conk_current_and_next_station.jpg)
 
 * * *
@@ -109,8 +109,7 @@ With these changes, Conky will directly display the temperature of the disks and
 ![conky from my antiX desktop](screenshot/screenshot_conky.jpg)
 
 The desktop wallpaper is a photograph of a sunset on one of my bicycle rides along the Rio Gallegos coastal (Argentina).
-![conky from my antiX desktop](screenshot/screenshot_antix_rox-icewm_desktop.jpg
-)
+![conky from my antiX desktop](screenshot/screenshot_antix_rox-icewm_desktop.jpg)
 
 
 ## The new icons for the stations:
