@@ -22,15 +22,21 @@ horas_luz_restantes() {
 
     # Convertir hora actual y atardecer a segundos desde medianoche
     # Hora actual
-    hora=$(echo $hora_actual | cut -d: -f1)
-    min=$(echo $hora_actual | cut -d: -f2)
-    seg=$(echo $hora_actual | cut -d: -f3)
+    hora=$(echo $hora_actual | cut -d: -f1 | sed 's/^0*//')  # Eliminar ceros a la izquierda
+    min=$(echo $hora_actual | cut -d: -f2 | sed 's/^0*//')   # Eliminar ceros a la izquierda
+    seg=$(echo $hora_actual | cut -d: -f3 | sed 's/^0*//')   # Eliminar ceros a la izquierda
+    hora=${hora:-0}  # Si está vacío (por ej. "00"), establecer en 0
+    min=${min:-0}
+    seg=${seg:-0}
     segundos_actual=$((hora * 3600 + min * 60 + seg))
 
     # Hora del atardecer
-    hora_atardecer=$(echo $atardecer | cut -d: -f1)
-    min_atardecer=$(echo $atardecer | cut -d: -f2)
-    seg_atardecer=$(echo $atardecer | cut -d: -f3)
+    hora_atardecer=$(echo $atardecer | cut -d: -f1 | sed 's/^0*//')  # Eliminar ceros a la izquierda
+    min_atardecer=$(echo $atardecer | cut -d: -f2 | sed 's/^0*//')   # Eliminar ceros a la izquierda
+    seg_atardecer=$(echo $atardecer | cut -d: -f3 | sed 's/^0*//')   # Eliminar ceros a la izquierda
+    hora_atardecer=${hora_atardecer:-0}
+    min_atardecer=${min_atardecer:-0}
+    seg_atardecer=${seg_atardecer:-0}
     segundos_atardecer=$((hora_atardecer * 3600 + min_atardecer * 60 + seg_atardecer))
 
     # Calcular diferencia en segundos
