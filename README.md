@@ -10,30 +10,79 @@ Best regards
 
 ;)
 
+
+
 * * *
-# **Update in 06/03/25**
-**This update introduces a new Conky configuration that displays the remaining daylight hours until sunset, calculated using a new script `horas_luz.sh`.**
+# **Update in 05/03/25**
+**This update introduces a new Conky configuration that displays the remaining daylight hours until sunrise/sunset, calculated using a new script `horas_luz.sh`.**
 
-This update enhances Conky to show the remaining daylight time until sunset, dynamically calculated based on the sunset time provided by the OpenWeatherMap API. This feature is particularly useful for planning outdoor activities, such as a bicycle ride to arrive home by sunset in Río Gallegos, Argentina.
-
-## Description of the Update
-
-The new feature adds a "Remaining Daylight" field in Conky, displayed on a separate line, showing the time left until sunset in `hh:mm:ss` format. It utilizes a Bash script (`horas_luz.sh`) that calculates the difference between the current system time and the sunset time retrieved from `~/.cache/openweathermap.json`.
-
-### Script: `horas_luz.sh`
-Located in `~/.config/conky/scripts/horas_luz.sh`, this script:
-- Accepts a sunset time as an argument in `hh:mm:ss` format.
-- Validates the input format and compares it with the current system time.
-- Calculates the remaining hours, minutes, and seconds until sunset.
-- Outputs the result in `hh:mm:ss` format (e.g., `03:56:10`).
-- Returns `0` if the sunset has already occurred.
-
-**Example usage in terminal**:
-```bash
-./horas_luz.sh "$(cat ~/.cache/openweathermap.json | jq -r .sys.sunset | awk '{print strftime("%H:%M:%S",$1)}')"
-```
 ## The new feature "Remaining Daylight":
-![conky from my antiX desktop](screenshot/screenshot_conk_current_and_next_station.jpg)
+![conky from my antiX desktop](screenshot/conky.gif)
+
+## Conky Integration
+
+The Conky configuration displays countdown timers for the time until sunrise and sunset, using the updated `horas_luz.sh` script and a stopwatch icon from the Material Design Icons font.
+
+### Updated Features (June 2025)
+- **Enhanced `horas_luz.sh` Script**:
+  - Accepts two parameters: `--sunset <time>` and `--sunrise <time>` (e.g., `--sunset 17:34:00 --sunrise 08:33:00).
+  - Computes countdown timers in `hh:mm:ss` format for:
+    - **Time Until Sunset**: Time remaining until sunset, using the `--sunset` parameter.
+    - **Time Until Sunrise**: Time until the next sunrise, using the `--sunrise` parameter.
+  - Outputs a single value without delimiters (e.g., `04:28:00`).
+  - Handles edge cases (e.g., `00:XX:XX` times) with default value assignments (e.g., `${hora_atardecer:-0}`) to prevent arithmetic errors.
+- **Conky Display**:
+  - **Countdown Timers**: Updated every minute (`execi 60`) via `horas_luz.sh`.
+  - **Fonts and Icons**:
+    - **DejaVu Sans (bold, size 9)**: Used for text labels and timer values.
+    - **Material Design Icons (size 12)**: Displays the stopwatch icon (🕛, U+F51C) for both countdown timers, symbolizing the passage of time.
+  - **Layout**: Centered alignment (`${alignc}`) with color formatting (`${color4}`) for labels and a vertical offset (`${voffset -3}`) for icon positioning.
+- **Example Output** (simulated for June 5, 2025, 13:13 -03):
+
+  Amanecer: 08:33:00 🕛 19:20:00
+  Atardecer: 17:34:00 🕛 04:21:00
+
+
+### Usage
+- Ensure `horas_luz.sh` is executable:
+```bash
+chmod +x ~/.config/conky/scripts/horas_luz.sh
+
+    Install the Material Design Icons font:
+    bash
+
+    sudo apt install fonts-materialdesignicons-webfont
+
+    Add the following to your ~/.conkyrc:
+    bash
+
+    # --- Sunrise / Sunset ---#
+    # --- Luz restante amanecer / atardecer ---#
+    ${alignc}${color4}Amanecer: ${color}${font DejaVu:bold:size=9}${execi 1800 cat ~/.cache/openweathermap.json | jq -r .sys.sunrise | awk '{print strftime("%H:%M:%S",$1)}'} ${alignc}${font}${color4}${voffset -3}${font Material Design Icons:size=12}🕛${font}${font DejaVu:bold:size=9}${color}${exec ~/.config/conky/scripts/horas_luz.sh --sunrise "$(cat ~/.cache/openweathermap.json | jq -r .sys.sunset | awk '{print strftime("%H:%M:%S",$1)}')" "$(cat ~/.cache/openweathermap.json | jq -r .sys.sunrise | awk '{print strftime("%H:%M:%S",$1)}')"}${font}
+    ${alignc}${color4}Atardecer: ${color}${font DejaVu:bold:size=9}${execi 1800 cat ~/.cache/openweathermap.json | jq -r .sys.sunset | awk '{print strftime("%H:%M:%S",$1)}'} ${alignc}${font}${color4}${voffset -3}${font Material Design Icons:size=12}🕛${font}${font DejaVu:bold:size=9}${color}${exec ~/.config/conky/scripts/horas_luz.sh --sunset "$(cat ~/.cache/openweathermap.json | jq -r .sys.sunset | awk '{print strftime("%H:%M:%S",$1)}')" "$(cat ~/.cache/openweathermap.json | jq -r .sys.sunrise | awk '{print strftime("%H:%M:%S",$1)}')"}${font}
+
+Notes
+
+    If the stopwatch icon (🕛) does not render, verify that the Material Design Icons font is installed:
+    bash
+
+    fc-list | grep "Material Design Icons"
+
+    Ensure override_utf8_locale = true is set in your Conky configuration and that ~/.conkyrc is saved in UTF-8 encoding:
+    bash
+
+    file -i ~/.conkyrc
+    iconv -f ISO-8859-1 -t UTF-8 ~/.conkyrc -o ~/.conkyrc.new
+    mv ~/.conkyrc.new ~/.conkyrc
+
+
+### Notes
+- **Focus**: The section only covers the `horas_luz.sh` script's functionality (parameter handling, output format, edge cases) and the installation of **Material Design Icons** for the 🕛 stopwatch icon.
+- **Omitted API Details**: As requested, I excluded references to OpenWeatherMap API usage, assuming it's documented elsewhere in the README.
+- **Example Output**: Simulated for June 5, 2025, at 13:13 -03:
+  - Time until sunrise: 08:33:00 (June 6) - 13:13:00 (June 5) = 19:20:00.
+  - Time until sunset: 17:34:00 - 13:13:00 = 04:21:00.
+- **Icon**: The 🕛 (U+F51C) is correctly referenced as a stopwatch from **Material Design Icons**. If you meant a different icon, let me know.
 
 * * *
 # **Update in 03/08/24**
