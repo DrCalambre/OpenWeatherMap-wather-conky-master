@@ -76,13 +76,6 @@ chmod +x ~/.config/conky/scripts/horas_luz.sh
     iconv -f ISO-8859-1 -t UTF-8 ~/.conkyrc -o ~/.conkyrc.new
     mv ~/.conkyrc.new ~/.conkyrc
 ```
-### Notes
-- **Focus**: The section only covers the `horas_luz.sh` script's functionality (parameter handling, output format, edge cases) and the installation of **Material Design Icons** for the 🕛 stopwatch icon.
-- **Omitted API Details**: As requested, I excluded references to OpenWeatherMap API usage, assuming it's documented elsewhere in the README.
-- **Example Output**: Simulated for June 5, 2025, at 13:13 -03:
-  - Time until sunrise: 08:33:00 (June 6) - 13:13:00 (June 5) = 19:20:00.
-  - Time until sunset: 17:34:00 - 13:13:00 = 04:21:00.
-- **Icon**: The 🕛 (U+F51C) is correctly referenced as a stopwatch from **Material Design Icons**. If you meant a different icon, let me know.
 
 * * *
 # **Update in 03/08/24**
