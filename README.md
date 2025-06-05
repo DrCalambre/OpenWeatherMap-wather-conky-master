@@ -47,35 +47,34 @@ The Conky configuration displays countdown timers for the time until sunrise and
 - Ensure `horas_luz.sh` is executable:
 ```bash
 chmod +x ~/.config/conky/scripts/horas_luz.sh
-```
-    Install the Material Design Icons font:
+
+- **Install the Material Design Icons font:
 
 ```bash
     sudo apt install fonts-materialdesignicons-webfont
-```
-    Add the following to your ~/.conkyrc:
+
+- **Add the following to your ~/.conkyrc:
 
 ```plaintext
     # --- Sunrise / Sunset ---#
     # --- Luz restante amanecer / atardecer ---#
     ${alignc}${color4}Amanecer: ${color}${font DejaVu:bold:size=9}${execi 1800 cat ~/.cache/openweathermap.json | jq -r .sys.sunrise | awk '{print strftime("%H:%M:%S",$1)}'} ${alignc}${font}${color4}${voffset -3}${font Material Design Icons:size=12}🕛${font}${font DejaVu:bold:size=9}${color}${exec ~/.config/conky/scripts/horas_luz.sh --sunrise "$(cat ~/.cache/openweathermap.json | jq -r .sys.sunset | awk '{print strftime("%H:%M:%S",$1)}')" "$(cat ~/.cache/openweathermap.json | jq -r .sys.sunrise | awk '{print strftime("%H:%M:%S",$1)}')"}${font}
     ${alignc}${color4}Atardecer: ${color}${font DejaVu:bold:size=9}${execi 1800 cat ~/.cache/openweathermap.json | jq -r .sys.sunset | awk '{print strftime("%H:%M:%S",$1)}'} ${alignc}${font}${color4}${voffset -3}${font Material Design Icons:size=12}🕛${font}${font DejaVu:bold:size=9}${color}${exec ~/.config/conky/scripts/horas_luz.sh --sunset "$(cat ~/.cache/openweathermap.json | jq -r .sys.sunset | awk '{print strftime("%H:%M:%S",$1)}')" "$(cat ~/.cache/openweathermap.json | jq -r .sys.sunrise | awk '{print strftime("%H:%M:%S",$1)}')"}${font}
-```
-Notes
+
+- **Notes
 
     If the stopwatch icon (🕛) does not render, verify that the Material Design Icons font is installed:
     bash
 
 ```bash
     fc-list | grep "Material Design Icons"
-```
-    Ensure override_utf8_locale = true is set in your Conky configuration and that ~/.conkyrc is saved in UTF-8 encoding:
+
+- **Ensure override_utf8_locale = true is set in your Conky configuration and that ~/.conkyrc is saved in UTF-8 encoding:
 
 ```bash
     file -i ~/.conkyrc
     iconv -f ISO-8859-1 -t UTF-8 ~/.conkyrc -o ~/.conkyrc.new
     mv ~/.conkyrc.new ~/.conkyrc
-```
 
 ### Notes
 - **Focus**: The section only covers the `horas_luz.sh` script's functionality (parameter handling, output format, edge cases) and the installation of **Material Design Icons** for the 🕛 stopwatch icon.
