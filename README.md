@@ -154,15 +154,15 @@ The desktop wallpaper is a photograph of a sunset on one of my bicycle rides alo
 ![conky from my antiX desktop](screenshot/screenshot_antix_rox-icewm_desktop.jpg)
 
 
+* * *
+# **Update in 02/06/24**
+**calculate if it is spring, summer, autumn or winter.**
+
 ## The new icons for the stations:
 ![conky from my antiX desktop](icons/spring.png)
 ![conky from my antiX desktop](icons/summer.png)
 ![conky from my antiX desktop](icons/autumn.png)
 ![conky from my antiX desktop](icons/winter.png)
-
-* * *
-# **Update in 02/06/24**
-**calculate if it is spring, summer, autumn or winter.**
 
 This update for Conky is useful for those who want to have updated information about the seasons of 
 the year and the days remaining until the change of season, based on their geographical location. 
