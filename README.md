@@ -22,6 +22,76 @@ If this project makes your desktop more enjoyable or helps you plan your day und
 
 ---
 
+# ✨ Design Philosophy
+
+This project is intended to be more than a collection of Conky widgets.
+
+The objective is to create a compact environmental dashboard where information is organized through typography, colour, iconography and Cairo graphics. Rather than filling the desktop with numbers, each visual element is designed to communicate its importance at a glance while maintaining a clean and unobtrusive appearance.
+
+Every design decision aims to balance readability, aesthetics and performance, allowing the interface to remain lightweight enough for low-resource systems while providing a polished desktop experience.
+
+## Typography and Visual Hierarchy
+
+Typography is one of the main tools used to organize information throughout the dashboard. Instead of relying on a single font, different typefaces are combined according to their visual characteristics and intended purpose.
+
+| Font | Purpose |
+|------|---------|
+| **LCD2** | Large digital clock and forecast times. Simulates segmented LCD displays for immediate readability. |
+| **LCDMono** | Sunrise, sunset and astronomical times. A monospaced digital style reinforces the concept of precision. |
+| **DejaVu Sans** | Primary interface font used for labels, titles and system information because of its excellent readability and wide Unicode coverage. |
+| **Roboto Light** | Weather descriptions and location names. Its lighter appearance visually separates descriptive information from numerical data. |
+| **VL PGothic** | Current temperature. Rounded glyphs provide a softer appearance while emphasizing the most important weather value. |
+| **Material Design Icons** | Interface symbols such as sunrise, sunset and stopwatch indicators. |
+| **Symbola** | Unicode symbols including wind direction arrows and solar icons. |
+| **Noto Color Emoji** | Moon phase emojis rendered by the Cairo lunar bar (recommended). |
+
+Different font sizes and weights establish a clear visual hierarchy:
+
+- Large fonts immediately attract attention (clock and current temperature).
+- Medium bold fonts identify sections and important values.
+- Smaller fonts present supporting information without competing visually.
+- Monospaced digital fonts reinforce the concept of measured time.
+- Icons complement the text rather than replacing it, reducing visual clutter.
+
+This layered typography allows the desktop to remain information-dense while still being easy to scan in everyday use.
+
+## Color Language
+
+Colours are used consistently to encode information instead of serving purely decorative purposes.
+
+- 🟡 **Yellow** highlights time-related information and values requiring immediate attention.
+- 🟠 **Orange** identifies labels and contextual information.
+- 🔵 **Light blue** represents measured data such as weather, humidity, wind and system resources.
+- 🟢 **Green** indicates comfortable or moderate conditions.
+- 🔴 **Red** signals high temperatures or warning conditions.
+
+The vertical Cairo thermometer extends this language through a continuous temperature scale:
+
+- ❄️ Blue — Cold (<10°C)
+- 🌿 Green — Mild (10–20°C)
+- 🍊 Orange — Warm (20–30°C)
+- 🔥 Red — Hot (>30°C)
+
+Using colour as a semantic element makes the interface easier to interpret without requiring constant reading.
+
+## Cairo Graphics
+
+Several interface components are rendered directly with Cairo instead of relying on static images.
+
+Current Cairo-rendered elements include:
+
+- Lunar illumination progress bar
+- Vertical glass thermometer
+- Dynamic gradients and reflections
+- Soft shadows and rounded geometry
+- Hemisphere-aware moon visualization
+
+Rendering these elements procedurally provides smooth scaling, lower memory usage and a cohesive visual style while keeping the project lightweight and easy to extend with future indicators.
+
+The long-term goal is to evolve this Conky configuration into a unified desktop dashboard where every graphical component follows the same design language.
+
+---
+
 ## 🛠️ Installation
 
 ### 🔄 Real Transparency Requirement (IceWM / AntiX)
