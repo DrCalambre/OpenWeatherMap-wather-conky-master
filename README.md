@@ -393,52 +393,6 @@ UV data provided by **Open-Meteo**
 
 ---
 
-### **Update — 08/05/26 — v1.5.0**
-
-**Vertical thermometer with Cairo graphics**
-
-A new realistic glass thermometer has been added, complementing the lunar bar. It displays the current temperature with a fluid‑filled bulb that changes colour dynamically, making the desktop feel even more alive.
-
-![Conky with vertical thermometer](screenshot/thermometer.png)
-
-#### Visual features
-
-- **Dynamic colour range** according to temperature:
-  - ❄️ **Blue** (<10°C) – cold, ice, frost
-  - 🌿 **Green** (10–20°C) – mild, fresh, comfortable
-  - 🍊 **Orange** (20–30°C) – warm, summer, pleasant heat
-  - 🔥 **Red** (>30°C) – extreme heat, alert, danger
-
-- **Polished glass design**:
-  - Vertical tube with rounded corners
-  - Drop‑shaped bulb at the bottom
-  - Outer shadow for depth (simulated blur)
-  - Gradient glass material (radial for bulb, linear for tube)
-  - Fluid with vertical gradient and lateral highlight for volume
-  - Meniscus curve (subtle detail showing liquid surface tension)
-  - White reflections on glass (vertical line on tube, bright spot on bulb)
-
-- **Side scale**: marks every 10°C with numeric labels, drawn directly in Cairo.
-
-- **Temperature text**: large, bold, centred below the bulb.
-
-#### Technical improvements
-
-- **New script**: `scripts/get_temp.sh` – extracts current temperature from `openweathermap.json` and caches it in `~/.cache/current_temp`. Called every 360 seconds.
-- **Updated `conky.conf`**:
-  - Added `${execi 360 ~/.config/conky/scripts/get_temp.sh}` to keep temperature cache fresh.
-  - Changed `lua_draw_hook_post` from `"draw_moon_bar"` to `"draw"` to use the unified drawing function.
-- **Enhanced `scripts/moon_bar.lua`**:
-  - Now contains both `draw_moon_bar()` and `draw_thermometer_vertical()`.
-  - New main function `conky_draw()` that calls both and manages the Cairo surface.
-  - Clean separation of concerns, easy to extend with more visual elements in the future (UV gauge, humidity, pressure, etc.).
-
-#### Integration note
-
-The thermometer works side‑by‑side with the lunar bar. Both are drawn in the same Lua script, reducing overhead and keeping the configuration tidy. The new `get_temp.sh` script avoids calling `jq` multiple times per second, improving performance.
-
----
-
 ### **Update — 23/08/26 — antiX 26 / Cairo-Xlib compatibility fix**
 
 **Cairo / Conky compatibility after migrating from antiX 23 to antiX 26**
@@ -646,9 +600,51 @@ before calling `cairo_xlib_surface_create()`.
 
 ````
 
-### Y agregaría una pequeña nota al final del README
+---
 
+### **Update — 08/05/26 — v1.5.0**
 
+**Vertical thermometer with Cairo graphics**
+
+A new realistic glass thermometer has been added, complementing the lunar bar. It displays the current temperature with a fluid‑filled bulb that changes colour dynamically, making the desktop feel even more alive.
+
+![Conky with vertical thermometer](screenshot/thermometer.png)
+
+#### Visual features
+
+- **Dynamic colour range** according to temperature:
+  - ❄️ **Blue** (<10°C) – cold, ice, frost
+  - 🌿 **Green** (10–20°C) – mild, fresh, comfortable
+  - 🍊 **Orange** (20–30°C) – warm, summer, pleasant heat
+  - 🔥 **Red** (>30°C) – extreme heat, alert, danger
+
+- **Polished glass design**:
+  - Vertical tube with rounded corners
+  - Drop‑shaped bulb at the bottom
+  - Outer shadow for depth (simulated blur)
+  - Gradient glass material (radial for bulb, linear for tube)
+  - Fluid with vertical gradient and lateral highlight for volume
+  - Meniscus curve (subtle detail showing liquid surface tension)
+  - White reflections on glass (vertical line on tube, bright spot on bulb)
+
+- **Side scale**: marks every 10°C with numeric labels, drawn directly in Cairo.
+
+- **Temperature text**: large, bold, centred below the bulb.
+
+#### Technical improvements
+
+- **New script**: `scripts/get_temp.sh` – extracts current temperature from `openweathermap.json` and caches it in `~/.cache/current_temp`. Called every 360 seconds.
+- **Updated `conky.conf`**:
+  - Added `${execi 360 ~/.config/conky/scripts/get_temp.sh}` to keep temperature cache fresh.
+  - Changed `lua_draw_hook_post` from `"draw_moon_bar"` to `"draw"` to use the unified drawing function.
+- **Enhanced `scripts/moon_bar.lua`**:
+  - Now contains both `draw_moon_bar()` and `draw_thermometer_vertical()`.
+  - New main function `conky_draw()` that calls both and manages the Cairo surface.
+  - Clean separation of concerns, easy to extend with more visual elements in the future (UV gauge, humidity, pressure, etc.).
+
+#### Integration note
+
+The thermometer works side‑by‑side with the lunar bar. Both are drawn in the same Lua script, reducing overhead and keeping the configuration tidy. The new `get_temp.sh` script avoids calling `jq` multiple times per second, improving performance.
 
 ---
 
