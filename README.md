@@ -439,6 +439,219 @@ The thermometer works side‑by‑side with the lunar bar. Both are drawn in the
 
 ---
 
+### **Update — 23/08/26 — antiX 26 / Cairo-Xlib compatibility fix**
+
+**Cairo / Conky compatibility after migrating from antiX 23 to antiX 26**
+
+After migrating the Conky configuration from **antiX 23 to antiX 26**, the existing `moon_bar.lua` stopped working correctly.
+
+The visual code itself was still valid: the lunar bar, thermometer, gradients, shadows and Cairo drawing routines did not require modification.
+
+The problem was related to the availability of the **X11 Cairo surface functions** used by Conky.
+
+#### The error
+
+When Conky was started with the old `moon_bar.lua`, the terminal reported an error similar to:
+
+```text
+conky: lua_do_call: function conky_draw execution failed:
+.../moon_bar.lua:...: attempt to call a nil value
+(global 'cairo_xlib_surface_create')
+````
+
+The important part of the error was:
+
+```text
+attempt to call a nil value (global 'cairo_xlib_surface_create')
+```
+
+The function was being called here:
+
+```lua
+local cs = cairo_xlib_surface_create(
+    conky_window.display,
+    conky_window.drawable,
+    conky_window.visual,
+    conky_window.width,
+    conky_window.height
+)
+```
+
+The previous version of the script only loaded:
+
+```lua
+require 'cairo'
+```
+
+On the new antiX 26 environment, this was no longer sufficient to make the Xlib-specific Cairo functions available.
+
+---
+
+### 🔧 Solution
+
+The fix was to explicitly load the Cairo Xlib module.
+
+The original first line:
+
+```lua
+require 'cairo'
+```
+
+was changed to:
+
+```lua
+require 'cairo'
+
+-- Attempt to load cairo_xlib if available
+-- This is required by cairo_xlib_surface_create()
+local has_cairo_xlib, _ = pcall(require, 'cairo_xlib')
+```
+
+The use of `pcall()` prevents the module-loading operation itself from terminating Lua if the module is unavailable.
+
+The rest of the Cairo drawing code remains unchanged.
+
+---
+
+### 🧪 Manual diagnostic and repair
+
+The problem was initially diagnosed by running Conky directly from a terminal:
+
+```bash
+conky -c ~/.config/conky/conky.conf
+```
+
+The error showed that `cairo_xlib_surface_create()` was not available.
+
+The first repair was tested directly by inserting the module after the existing Cairo declaration:
+
+```bash
+sed -i "1a require 'cairo_xlib'" ~/.config/conky/scripts/moon_bar.lua
+```
+
+The beginning of the file was then checked with:
+
+```bash
+head -3 ~/.config/conky/scripts/moon_bar.lua
+```
+
+Expected result:
+
+```lua
+require 'cairo'
+require 'cairo_xlib'
+```
+
+After confirming that the Xlib Cairo functions were available, the final version was made slightly more defensive by using:
+
+```lua
+local has_cairo_xlib, _ = pcall(require, 'cairo_xlib')
+```
+
+---
+
+### 🧠 Why this matters
+
+The important lesson is that this was **not a problem with the lunar calculations, the thermometer code, Cairo gradients or the Conky configuration itself**.
+
+The failure occurred at the boundary between:
+
+```text
+Conky
+   │
+   └── Lua
+        │
+        ├── cairo
+        │
+        └── cairo_xlib
+              │
+              └── X11 drawing surface
+```
+
+The function:
+
+```lua
+cairo_xlib_surface_create()
+```
+
+belongs to the Xlib integration used to create the Cairo drawing surface associated with the Conky X11 window.
+
+The antiX 23 environment made this functionality available through the previous loading arrangement. After migrating to antiX 26, it became necessary to explicitly load:
+
+```lua
+cairo_xlib
+```
+
+---
+
+### 📌 Final `moon_bar.lua` header
+
+The beginning of the corrected script is therefore:
+
+```lua
+require 'cairo'
+
+-- Attempt to load cairo_xlib if available
+local has_cairo_xlib, _ = pcall(require, 'cairo_xlib')
+```
+
+The main drawing function continues to create the X11 Cairo surface:
+
+```lua
+local cs = cairo_xlib_surface_create(
+    conky_window.display,
+    conky_window.drawable,
+    conky_window.visual,
+    conky_window.width,
+    conky_window.height
+)
+```
+
+No changes were required to the lunar bar or vertical thermometer rendering code.
+
+---
+
+### 🔄 Migration note: antiX 23 → antiX 26
+
+This compatibility change should be kept when using this configuration on **antiX 26**.
+
+If the configuration is migrated again to another distribution or Conky/Cairo environment, the availability of the `cairo_xlib` Lua module should be checked if an error involving:
+
+```text
+cairo_xlib_surface_create
+```
+
+appears.
+
+A quick diagnostic is:
+
+```bash
+conky -c ~/.config/conky/conky.conf
+```
+
+If Conky reports:
+
+```text
+attempt to call a nil value
+(global 'cairo_xlib_surface_create')
+```
+
+check that the Lua Cairo Xlib module is explicitly loaded:
+
+```lua
+require 'cairo_xlib'
+```
+
+before calling `cairo_xlib_surface_create()`.
+
+````
+
+### Y agregaría una pequeña nota al final del README
+
+
+
+---
+
 ### **Update — 22/04/26 — v1.4.0**
 
 **Lunar phase bar with Cairo graphics**
