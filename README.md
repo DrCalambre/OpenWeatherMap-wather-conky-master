@@ -600,8 +600,6 @@ before calling `cairo_xlib_surface_create()`.
 
 ````
 
----
-
 ### **Update — 08/05/26 — v1.5.0**
 
 **Vertical thermometer with Cairo graphics**
