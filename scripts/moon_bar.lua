@@ -1,4 +1,6 @@
 require 'cairo'
+-- Intentar cargar cairo_xlib si está disponible (no falla si no existe)
+local has_cairo_xlib, _ = pcall(require, 'cairo_xlib')
 
 -- ==============================
 -- FUNCIÓN AUXILIAR: Rectángulo redondeado
@@ -387,14 +389,20 @@ end
 function conky_draw()
     if conky_window == nil then return end
 
-    local cs = cairo_xlib_surface_create(conky_window.display, conky_window.drawable,
-        conky_window.visual, conky_window.width, conky_window.height)
+    local cs = cairo_xlib_surface_create(
+        conky_window.display,
+        conky_window.drawable,
+        conky_window.visual,
+        conky_window.width,
+        conky_window.height
+    )
+
     local cr = cairo_create(cs)
 
-    -- Dibujar barra lunar (sus coordenadas están fijas dentro de la función)
+    -- Barra lunar
     draw_moon_bar(cr)
 
-    -- Dibujar termómetro vertical (ajusta x, y, ancho, alto a tu gusto)
+    -- Termómetro vertical
     draw_thermometer_vertical(cr, 215, 10, 20, 90)
 
     cairo_destroy(cr)
