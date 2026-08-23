@@ -391,7 +391,8 @@ UV data provided by **Open-Meteo**
 
 ## 🆕 Updates & Technical History
 
-````markdown
+---
+
 ### **Update — 23/08/26 — antiX 26 / Cairo-Xlib compatibility fix**
 
 **Cairo / Conky compatibility after migrating from antiX 23 to antiX 26**
