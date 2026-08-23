@@ -598,6 +598,10 @@ require 'cairo_xlib'
 before calling `cairo_xlib_surface_create()`.
 
 ````
+```markdown
+> **Compatibility note:**  
+> The `moon_bar.lua` script uses Cairo through Conky's Lua interface and creates an X11 drawing surface with `cairo_xlib_surface_create()`. On newer environments, loading `cairo` alone may not expose the Xlib-specific functions. If the function is reported as `nil`, explicitly load the `cairo_xlib` Lua module.
+````
 
 ### **Update — 08/05/26 — v1.5.0**
 
