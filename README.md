@@ -1,4 +1,3 @@
-```markdown
 # OpenWeatherMap-wather-conky-master
 
 A Conky configuration using the **OpenWeatherMap API**, featuring:
@@ -905,4 +904,3 @@ The desktop wallpaper is a photograph taken during a bicycle ride along the Río
 The desktop wallpaper conky V1.10.8 antiX rox-iceWM (2022)
 
 ![conky from my antiX desktop](screenshot/conky_V1.10.8_antiX_rox-iceWM_digitalClock-openWeatherMap-compass-moon_Argentina_Patagonia.jpg)
-```
