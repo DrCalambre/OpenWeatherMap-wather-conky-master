@@ -1,3 +1,4 @@
+```markdown
 # OpenWeatherMap-wather-conky-master
 
 A Conky configuration using the **OpenWeatherMap API**, featuring:
@@ -10,10 +11,11 @@ A Conky configuration using the **OpenWeatherMap API**, featuring:
 Implemented using **Bash, Perl and Conky**, designed and tested primarily on **AntiX Linux + IceWM**.
 
 📖 More info (Spanish):  
-https://drcalambre.blogspot.com/2023/09/conky-implementando-perl-para-las-fases.html  
+[https://drcalambre.blogspot.com/2023/09/conky-implementando-perl-para-las-fases.html](https://drcalambre.blogspot.com/2023/09/conky-implementando-perl-para-las-fases.html)  
 (A language translator is available on the blog.)
 
 ---
+
 If this project makes your desktop more enjoyable or helps you plan your day under the Sun and the Moon, consider buying me a coffee. Your gesture keeps me motivated to continue improving it.
 
 ☕ Invite me a coffee :)
@@ -114,7 +116,9 @@ Picom provides real compositing and proper ARGB support.
 ---
 
 ### ✅ Required Packages
+
 Make sure the following packages are installed:
+
 ```bash
 sudo apt install conky picom jq curl fonts-materialdesignicons-webfont fonts-noto-color-emoji
 ```
@@ -169,13 +173,14 @@ API_KEY="your_api_key_here"
 ```
 
 ---
+
 ## 5️⃣ Enable Real Transparency (IceWM / AntiX)
 
 Install picom if it is not already installed:
 
 ```bash
 sudo apt install picom
-````
+```
 
 ---
 
@@ -198,7 +203,6 @@ picom --backend xrender --vsync &
 ## --- Conky ---
 sleep 1
 bash /usr/local/bin/conkytoggle.sh &
-
 ```
 
 📌 If Conky starts **before** picom, transparency will not be applied correctly.
@@ -222,9 +226,9 @@ override_utf8_locale = true,
 
 This ensures:
 
-* Real ARGB transparency
-* No window borders or decorations
-* Correct font and icon rendering
+- Real ARGB transparency
+- No window borders or decorations
+- Correct font and icon rendering
 
 ---
 
@@ -244,23 +248,24 @@ conky &
 ```
 
 **Transparency only works after restarting Conky**
+
 Picom is starting too late. Fix the startup order.
 
 ---
 
 ### 🖥️ Tested Environment
 
-* **Window Manager**: IceWM
-* **Distribution**: AntiX Linux
-* **Compositor**: picom (xrender backend)
-* **Conky**: v1.10+
+- **Window Manager**: IceWM
+- **Distribution**: AntiX Linux
+- **Compositor**: picom (xrender backend)
+- **Conky**: v1.10+
 
 ---
-
 
 ## ☀️ UV Index Monitoring (Open-Meteo)
 
 This Conky configuration now includes **UV radiation monitoring** using the **Open-Meteo API**.
+
 > **Note on data accuracy**  
 > UV values are **model-based estimates** provided by the Open-Meteo API.  
 > They are derived from numerical weather models and **not from ground-based UV sensors**.  
@@ -268,40 +273,35 @@ This Conky configuration now includes **UV radiation monitoring** using the **Op
 
 ### 🧠 About UV data reliability (model-based vs physical sensors)
 
-The UV index shown here is **not measured by a local physical sensor**.
-It is calculated using **numerical weather models** provided by the Open-Meteo API.
+The UV index shown here is **not measured by a local physical sensor**. It is calculated using **numerical weather models** provided by the Open-Meteo API.
 
 This approach has some important practical advantages:
 
-* Affordable UV sensors often suffer from:
-  * Poor cosine correction
-  * Temperature drift
-  * Aging and calibration issues
-  * Strong sensitivity to sensor orientation and shading
+- Affordable UV sensors often suffer from:
+  - Poor cosine correction
+  - Temperature drift
+  - Aging and calibration issues
+  - Strong sensitivity to sensor orientation and shading
 
-* Model-based UV data:
-  * Integrates satellite observations, atmospheric composition and cloud cover
-  * Represents **area-averaged conditions**, not a single point measurement
-  * Is generally **more stable and consistent** than low-cost sensors
-  * Is widely used in weather services and public UV forecasts
+- Model-based UV data:
+  - Integrates satellite observations, atmospheric composition and cloud cover
+  - Represents **area-averaged conditions**, not a single point measurement
+  - Is generally **more stable and consistent** than low-cost sensors
+  - Is widely used in weather services and public UV forecasts
 
-For **daily exposure awareness, risk estimation and planning outdoor activities**,
-model-based UV values are often **more reliable than consumer-grade sensors**.
+For **daily exposure awareness, risk estimation and planning outdoor activities**, model-based UV values are often **more reliable than consumer-grade sensors**.
 
-That said, this data is **informational only** and not intended for medical,
-scientific or dosimetric use.
-
+That said, this data is **informational only** and not intended for medical, scientific or dosimetric use.
 
 ![UV radiation monitoring – Conky](screenshot/conky-UV-radiation-monitoring.gif)
 
-
 ### Features
 
-* Current UV Index
-* Daily maximum UV Index
-* Time of maximum UV radiation (model-based estimate)
-* Compact visual indicator for peak UV time (↑ HH:MM)
-* Automatic UV risk level classification
+- Current UV Index
+- Daily maximum UV Index
+- Time of maximum UV radiation (model-based estimate)
+- Compact visual indicator for peak UV time (↑ HH:MM)
+- Automatic UV risk level classification
 
 Designed to be lightweight and suitable for low-resource systems.
 
@@ -329,10 +329,10 @@ Located in:
 ~/.config/conky/scripts/
 ```
 
-* `openMeteo-uv.sh` → current UV index
-* `openMeteo-uv-hourly.sh` → hourly UV forecast
-* `uv_label.sh` → UV risk category
-* `uv_label_max_today.sh` → daily maximum UV and peak time
+- `openMeteo-uv.sh` → current UV index
+- `openMeteo-uv-hourly.sh` → hourly UV forecast
+- `uv_label.sh` → UV risk category
+- `uv_label_max_today.sh` → daily maximum UV and peak time
 
 ---
 
@@ -353,45 +353,39 @@ UV máx hoy 6.8 · 15:00
 Indicates the **time of maximum UV radiation** for the current day.
 
 ---
+
 ### 🌍 About the meteorological models behind Open-Meteo
 
-Open-Meteo does not rely on a single proprietary model.
-Instead, it aggregates and exposes **open numerical weather models**
-from some of the most reputable meteorological institutions worldwide.
+Open-Meteo does not rely on a single proprietary model. Instead, it aggregates and exposes **open numerical weather models** from some of the most reputable meteorological institutions worldwide.
 
 According to Open-Meteo, the UV and weather data are built using open data from:
 
-* **NOAA** (United States)
-* **DWD** – Deutscher Wetterdienst (Germany)
-* **Météo-France**
-* **ECMWF** – European Centre for Medium-Range Weather Forecasts
-* **JMA** – Japan Meteorological Agency
+- **NOAA** (United States)
+- **DWD** – Deutscher Wetterdienst (Germany)
+- **Météo-France**
+- **ECMWF** – European Centre for Medium-Range Weather Forecasts
+- **JMA** – Japan Meteorological Agency
 
 These models combine:
 
-* Satellite observations
-* Atmospheric chemistry and ozone data
-* Cloud cover, aerosols and surface reflection
-* Continuous data assimilation and frequent updates
+- Satellite observations
+- Atmospheric chemistry and ozone data
+- Cloud cover, aerosols and surface reflection
+- Continuous data assimilation and frequent updates
 
-Model outputs are typically generated at **high spatial resolution (≈1–2 km)**
-and updated **hourly**, making them well suited for regional-scale
-UV exposure awareness.
+Model outputs are typically generated at **high spatial resolution (≈1–2 km)** and updated **hourly**, making them well suited for regional-scale UV exposure awareness.
 
-This is the same class of data used by national weather services
-to publish public UV index forecasts.
+This is the same class of data used by national weather services to publish public UV index forecasts.
 
 ### 🌐 Data Source
 
-UV data provided by **Open-Meteo**
+UV data provided by **Open-Meteo**  
 [https://open-meteo.com/](https://open-meteo.com/)
-
 
 ---
 
 ## 🆕 Updates & Technical History
 
-````markdown
 ### **Update — 23/08/26 — antiX 26 / Cairo-Xlib compatibility fix**
 
 **Cairo / Conky compatibility after migrating from antiX 23 to antiX 26**
@@ -410,7 +404,7 @@ When Conky was started with the old `moon_bar.lua`, the terminal reported an err
 conky: lua_do_call: function conky_draw execution failed:
 .../moon_bar.lua:...: attempt to call a nil value
 (global 'cairo_xlib_surface_create')
-````
+```
 
 The important part of the error was:
 
@@ -597,11 +591,10 @@ require 'cairo_xlib'
 
 before calling `cairo_xlib_surface_create()`.
 
-````
-```markdown
 > **Compatibility note:**  
 > The `moon_bar.lua` script uses Cairo through Conky's Lua interface and creates an X11 drawing surface with `cairo_xlib_surface_create()`. On newer environments, loading `cairo` alone may not expose the Xlib-specific functions. If the function is reported as `nil`, explicitly load the `cairo_xlib` Lua module.
-````
+
+---
 
 ### **Update — 08/05/26 — v1.5.0**
 
@@ -708,18 +701,20 @@ The Cairo bar **complements** (does not replace) the existing text lines showing
 
 Introduces real-time UV radiation monitoring, including:
 
-* Current UV Index display
-* Daily maximum UV value
-* Peak UV time indicator (↑ HH:MM)
-* Automatic UV risk classification
-* Lightweight scripts suitable for low-resource systems
+- Current UV Index display
+- Daily maximum UV value
+- Peak UV time indicator (↑ HH:MM)
+- Automatic UV risk classification
+- Lightweight scripts suitable for low-resource systems
 
 ![UV radiation monitoring – Conky](screenshot/conky-UV-radiation-monitoring.gif)
 
 ---
+
 ### **Update — 05/01/26**
 
 **Real transparency support using Picom (IceWM / AntiX)**
+
 Introduces mandatory compositor usage to enable proper ARGB transparency in Conky.
 
 ---
@@ -732,16 +727,16 @@ Introduces mandatory compositor usage to enable proper ARGB transparency in Conk
 
 Introduces a new Conky block showing:
 
-* Time until sunrise
-* Time until sunset
+- Time until sunrise
+- Time until sunset
 
 Powered by the `horas_luz.sh` script.
 
 #### Highlights
 
-* Countdown timers in `hh:mm:ss`
-* Material Design Icons stopwatch (🕛)
-* Automatic edge-case handling
+- Countdown timers in `hh:mm:ss`
+- Material Design Icons stopwatch (🕛)
+- Automatic edge-case handling
 
 (See full configuration and usage below.)
 
@@ -755,9 +750,9 @@ Displays SMART temperature for two disks and triggers alerts when critical.
 
 Includes:
 
-* `smartctl` integration
-* Optional passwordless sudo configuration
-* Visual alerts in Conky
+- `smartctl` integration
+- Optional passwordless sudo configuration
+- Visual alerts in Conky
 
 ---
 
@@ -767,9 +762,9 @@ Includes:
 
 Automatically detects:
 
-* Current season
-* Next season
-* Days remaining until season change
+- Current season
+- Next season
+- Days remaining until season change
 
 Supports both hemispheres and displays seasonal icons dynamically.
 
@@ -779,10 +774,13 @@ Supports both hemispheres and displays seasonal icons dynamically.
 ![conky from my antiX desktop](icons/winter.png)
 
 ---
+
 ## 🎬 Demo (Video Series)
 
 A cinematic Conky showcase inspired by *2001: A Space Odyssey* aesthetics.
+
 ---
+
 ### Episode 01 — Initialization (Take 1)
 
 > Inspired by the atmosphere of Tasmin Archer
@@ -798,8 +796,8 @@ A system awakens.
 
 > Inspired by the Apollo 15 mission
 
-The signal is no longer in orbit…
-now it's here.
+The signal is no longer in orbit…  
+now it's here.  
 On the surface of the Moon 🌕  
 the monolith reappears… but this time, it is not alone.
 
@@ -849,27 +847,27 @@ It has left a mark.
 
 > Inspired by the neoclassical room scene from 2001: A Space Odyssey.
 
-After contact, the system begins to interpret the signal.
-But it doesn’t understand it.
+After contact, the system begins to interpret the signal.  
+But it doesn't understand it.
 
-Instead, it reconstructs reality the only way it can:
+Instead, it reconstructs reality the only way it can:  
 through familiar structures, known formats… and incorrect meanings.
 
-The data looks right.
-The environment feels real.
+The data looks right.  
+The environment feels real.  
 But something is off.
 
-This is not a malfunction.
+This is not a malfunction.  
 This is interpretation.
 
-> parsing signal...
-> environment reconstructed
+> parsing signal...  
+> environment reconstructed  
 > accuracy: unknown
 
-The system is no longer receiving the signal.
+The system is no longer receiving the signal.  
 Now it is trying to explain it.
 
-And in doing so…
+And in doing so…  
 it starts to redefine reality.
 
 [![Watch Episode 04](screenshot/Interpretation-take-04.jpg)](https://www.youtube.com/shorts/oeEKzsVM5Rs)
@@ -880,15 +878,18 @@ it starts to redefine reality.
 
 > Inspired by the red eye of HAL 9000.
 >
-> The monolith no longer just observes. Now it measures the Earth's warmth.
-> After Initialization, Signal, Contact, and Interpretation… mercury rises inside the glass.
+> The monolith no longer just observes. Now it measures the Earth's warmth.  
+> After Initialization, Signal, Contact, and Interpretation… mercury rises inside the glass.  
 > But zoom in. Look closer.
 >
 > *"Just what do you think you're doing, Dave?"*
 
 [![Watch Episode 05](screenshot/HAL9000.png)](https://www.youtube.com/shorts/LXsEdRWeBVY)
 
+---
+
 ## 📸 Screenshots
+
 **UV radiation monitoring (model-based, Open-Meteo)**
 
 ![UV radiation monitoring – Conky](screenshot/conky-UV-radiation-monitoring.gif)
@@ -904,3 +905,4 @@ The desktop wallpaper is a photograph taken during a bicycle ride along the Río
 The desktop wallpaper conky V1.10.8 antiX rox-iceWM (2022)
 
 ![conky from my antiX desktop](screenshot/conky_V1.10.8_antiX_rox-iceWM_digitalClock-openWeatherMap-compass-moon_Argentina_Patagonia.jpg)
+```
